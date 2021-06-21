@@ -11,6 +11,14 @@ on:
 
 jobs:
   build:
+    env:
+      QGC_CREDENTIALS: "${{ secrets.QGC_CREDENTIALS }}"
+      QGC_URL: "${{ secrets.QGC_URL }}"
+      QGC_ORGANIZATION_ID: "${{ secrets.QGC_ORGANIZATION_ID }}"
+      QGC_COMPONENT_ID: "${{ secrets.QGC_COMPONENT_ID }}"
+      QGC_EVIDENCES_PATH: "./junit"
+      QGC_SCA_QG_NAME: "Sonar way"
+      JEST_JUNIT_OUTPUT_DIR: "./junit"
 
     runs-on: ubuntu-latest
 
@@ -27,4 +35,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm test
+    - run: npm test && ./qgc/upload-evidences.sh
