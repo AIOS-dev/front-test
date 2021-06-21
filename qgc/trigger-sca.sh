@@ -14,4 +14,4 @@ BRANCH_NAME=``
 curl --user "${QGC_CREDENTIALS}" \
   "${QGC_URL}/api/applications/${QGC_ORGANIZATION_ID}/componentqg/SOURCE_CODE_ANALYSIS/components/${QGC_COMPONENT_ID}/execution" \
   -H "Content-Type: application/json" \
-  -d "{\"branchName\":\"${GITHUB_REF}\",\"gitUrl\":\"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git\",\"qualityGateName\":\"\"}"
+  -d "{\"branchName\":\"${GITHUB_REF}\",\"gitUrl\":\"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git\",\"qualityGateName\":\"${QGC_SCA_QG_NAME}\"}"
