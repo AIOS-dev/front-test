@@ -40,12 +40,11 @@ fi
 
 cd "${QGC_EVIDENCES_PATH}"
 
-for file in $(find . -type f -name "*.txt" -o -name "*.xml"); do
-  echo "Uploading $file"
-  curl -sf -X "PUT" -T "$file" \
-    -H "${X_MS_DATE_H}" -H "x-ms-blob-type: BlockBlob" \
-    "${blobContainerUrl}/${file}?${sasSignature}"
-done
+file=junit.xml
+echo "Uploading $file"
+curl -sf -X "PUT" -T "$file" \
+  -H "${X_MS_DATE_H}" -H "x-ms-blob-type: BlockBlob" \
+  "${blobContainerUrl}/${file}?${sasSignature}"
 
 echo "Launch UT analyzer"
 curl -s -X POST --user "${QGC_CREDENTIALS}" -H "accept: application/json" \
