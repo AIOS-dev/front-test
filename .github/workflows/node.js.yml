@@ -42,3 +42,5 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm run test:ci && ./qgc/upload-evidences.sh
+    - name: Trigger SCA in QGC
+      run: ./qgc/trigger-sca.sh
