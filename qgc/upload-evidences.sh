@@ -1,12 +1,12 @@
 #!/bin/sh -x
 # Script to upload evidences to QGC
-
+BRANCH_NAME=$1
 set -e
 X_MS_DATE_H="x-ms-date:$(TZ=GMT LC_ALL=C date "+%a, %d %h %Y %H:%M:%S %Z")"
 
 # This script use the following env variable (default github env or secrets):
 for env in QGC_URL QGC_CREDENTIALS QGC_COMPONENT_ID QGC_ORGANIZATION_ID QGC_EVIDENCES_PATH \
-           GITHUB_SERVER_URL GITHUB_REPOSITORY GITHUB_REF; do
+           GITHUB_SERVER_URL GITHUB_REPOSITORY; do
   eval "value=\$${env}"
   if [ -z "${value}" ]; then
     echo "Missing variable ${env}. Please set it and rerun this script (export ${env}=VALUE)"
@@ -18,7 +18,7 @@ cat <<EOF >/tmp/request.json
 {
   "componentId": $QGC_COMPONENT_ID,
   "url": "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git",
-  "branchName": "$GITHUB_REF"
+  "branchName": "${BRANCH_NAME}"
 }
 EOF
 

@@ -47,4 +47,4 @@ jobs:
       id: extract_branch
     - run: npm run test:ci && ./qgc/upload-evidences.sh ${{ steps.extract_branch.outputs.branch }}
     - name: Trigger SCA in QGC
-      run: ./qgc/trigger-sca.sh
+      run: ./qgc/trigger-sca.sh ${{ steps.extract_branch.outputs.branch }}
